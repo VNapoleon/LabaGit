@@ -1,0 +1,131 @@
+D:\KPI\Project\lab1>git config --global user.name "Korshun1488"
+D:\KPI\Project\lab1>git config --global user.email "psinichka@gmail.com"
+
+git config --global core.autocrlf true
+git config --global core.safecrlf false
+git config --global core.eol native
+
+
+
+
+git push --set-upstream origin dev
+
+
+1. Создавать Git-репозиторий и добавлять в него файлы
+git init    //Инициализируем папку для Git репозитория. Это нужно сделать только один раз для каждого проекта.
+git remote add origin https://github.com/Korshun1488/laba.git   //Связываем папку с удаленным репозиторием
+	добавлять в него файлы
+git add .   //Добавляем все новые и измененные файлы
+git commit -m "message"   //Помечаем все новые и измененные файлы сообщением (commit)
+git push -u origin master  //Закачиваем код на удаленный репозиторий
+git push //в таком виде используем только первый раз, потом используем команду без флагов
+
+2. Клонировать существующий репозиторий, вносить изменения, просматривать изменения, отменять изменения
+git clone https://github.com/LeoXCoder/test_project.git //Клонирование репозитория
+	вносить изменения
+git add .   //Добавляем все новые и измененные файлы
+git commit -m "message"   //Помечаем все новые и измененные файлы сообщением (commit)
+git push -u origin master  //Закачиваем код на удаленный репозиторий
+git push //в таком виде используем только первый раз, потом используем команду без флагов
+	просматривать изменения
+git log -p -2   //-p, который показывает дельту (разницу/diff), привнесенную каждым коммитом. Вы также можете использовать -2, что ограничит вывод до 2-х последних записей
+	отменять изменения???????
+
+
+3. Просматривать историю изменений, выводить граф изменений
+git log  //История изменений
+git log --graph  //выводить граф изменений
+
+4. Работа с удаленным репозиторием
+- получение данных из удаленного репозитория, различия между git fetch и git pull
+- сохранение данных в удаленные репозиторий (учитывать сценарий, когда данные в нем были изменены после последнего получения)
+
+5. Создание и работа с бранчами
+git checkout aaaaa перейти к предідущему комиту 
+	- создание новой ветки и переключение между ветками(local)
+git checkout -b dev	//Создаем новую ветку в локальном репозитории:
+git push origin dev	//Публикуем ее на github:
+	- слияние веток
+git checkout master
+git merge dev
+	- разрешение конфликтов при слиянии
+git add lib/hello.html	&&
+git commit -m "Merged master fixed conflict."   &&
+	- ветки на удаленном репозитории
+git branch
+	переключится на другую ветку
+git checkout master
+6. Работа с Git internals
+	команды git cat-file -p <hash>, git cat-file -t <hash>
+	просмотр содержимого Commit Objects
+	Tree Objects
+
+
+
+
+
+
+
+
+
+
+
+1)создать 3 комита и создать новую ветку со второго комита
+git init
+git add *
+git commit -m "1st commit"
+
+git init
+git add *
+git commit -m "2nd commit"
+
+git branch new_tree
+git checkout new_tree
+git add *
+git commit -m "new tree"
+
+git checkout master
+git add *
+git commit -m "3th commit"
+
+git log —graph —all —decorate —oneline
+
+2)
+git branch third_branch 3f681dfb2096114b547b7de933542332e874be57
+git add *
+git commit -m "new tree 2"
+
+3)Разница между 2мя комитами
+git diff 4725c82cd43e29ea1cbdcf486cb3d15e57164591..3f681dfb2096114b547b7de933542332e874be57
+
+4)На удаленный репозиторий
+ git remote add git_lab https://bitbucket.org/stealth4x/git_lab
+ git remote -v
+ git push git_lab —all
+
+5)Решить конфликт глобального и локального репозитория
+ git checkout master
+ git add *
+ git commit -m "5th commit"
+ 
+ git fetch git_lab master
+
+git fetch origin master     !!!!!!
+ 
+ git diff 0abb0d4bde1a094efa9befe0d9f6778af48a09cc..a87e963300298aa09f1c84acffc256d0437a8f68
+ 
+ 6)
+ git add *
+ git commit -m "7th commit"
+ git fetch git_lab master
+ git log —graph —all
+ 
+ 7) 
+ git merge master third_branch
+ git add *
+ git commit -m "8th commit"
+ 
+ 8)
+ git cat-file -p  552a38f5ee34311989878331362470482a39b67d
+ 
+ git cat-file -t  552a38f5ee34311989878331362470482a39b67d
